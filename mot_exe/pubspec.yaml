@@ -1,0 +1,38 @@
+name: mot_burgo
+description: Your app description
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Per generare PDF
+  pdf: ^3.10.7
+  printing: ^5.11.2
+  open_file: ^3.3.3  # Per aprire file PDF
+  path: ^1.9.0
+  
+  # External packages
+  excel: ^2.1.0
+  sqflite: ^2.2.8
+  sqflite_common_ffi: ^2.2.5  # Aggiungi questa riga
+  path_provider: ^2.1.1
+  intl: ^0.17.0  # Downgraded to match flutter_form_builder
+  flutter_form_builder: ^7.8.0
+  
+  datetime_picker_formfield: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+  - assets/engines.xlsx
