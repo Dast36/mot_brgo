@@ -1,0 +1,52 @@
+Sub EstraiMotoriMC_ChiaveCol1_3()
+    Dim wsAC As Worksheet, wsBK As Worksheet, wsMC As Worksheet
+    Dim lastRowAC As Long, lastRowBK As Long, lastCol As Long
+    Dim dictBK As Object
+    Dim i As Long, j As Long
+    Dim key As String
+    Dim outputRow As Long
+    
+    Set wsAC = ThisWorkbook.Sheets("motori ac")
+    Set wsBK = ThisWorkbook.Sheets("motori bk")
+    
+    ' Elimina foglio motori mc se esiste
+    Application.DisplayAlerts = False
+    On Error Resume Next
+    ThisWorkbook.Sheets("motori mc").Delete
+    On Error GoTo 0
+    Application.DisplayAlerts = True
+    
+    Set wsMC = ThisWorkbook.Sheets.Add(After:=wsBK)
+    wsMC.Name = "motori mc"
+    
+    lastRowAC = wsAC.Cells(wsAC.Rows.Count, 1).End(xlUp).Row
+    lastRowBK = wsBK.Cells(wsBK.Rows.Count, 1).End(xlUp).Row
+    lastCol = wsAC.Cells(1, wsAC.Columns.Count).End(xlToLeft).Column
+    
+    ' Copia intestazioni
+    For j = 1 To lastCol
+        wsMC.Cells(1, j).Value = wsAC.Cells(1, j).Value
+    Next j
+    
+    ' Costruisci dizionario chiavi motori bk usando colonna 1 e 3 concatenate
+    Set dictBK = CreateObject("Scripting.Dictionary")
+    
+    For i = 2 To lastRowBK
+        key = LCase(Trim(wsBK.Cells(i, 1).Text)) & "|" & LCase(Trim(wsBK.Cells(i, 3).Text))
+        dictBK(key) = True
+    Next i
+    
+    ' Scorri motori ac e copia righe con chiave non presente in bk
+    outputRow = 2
+    For i = 2 To lastRowAC
+        key = LCase(Trim(wsAC.Cells(i, 1).Text)) & "|" & LCase(Trim(wsAC.Cells(i, 3).Text))
+        If Not dictBK.exists(key) Then
+            For j = 1 To lastCol
+                wsMC.Cells(outputRow, j).Value = wsAC.Cells(i, j).Value
+            Next j
+            outputRow = outputRow + 1
+        End If
+    Next i
+    
+    MsgBox "Finito! Righe uniche trovate: " & outputRow - 2, vbInformation
+End Sub
