@@ -1,0 +1,174 @@
+crea procedura istallazione ambiente os/2 multiboot con dos5.22 e istallazione boot manager d os/2
+
+
+Certo 🙂
+Ti propongo una procedura classica e collaudata per installare OS/2 in multiboot con MS-DOS 5.22, usando il Boot Manager di OS/2 (scenario tipico anni ’90 su PC BIOS).
+
+⚠️ Nota: OS/2 e DOS 5.22 usano MBR + partizioni primarie/logiche. La sequenza è importantissima.
+
+Requisiti
+PC compatibile BIOS (no UEFI)
+
+Hard disk IDE/SCSI (meglio ≤ 2 GB per zero problemi)
+
+Dischetti di:
+
+MS-DOS 5.22
+
+OS/2 2.x o Warp 3/4
+
+Backup completo dei dati (obbligatorio)
+
+Schema consigliato delle partizioni
+Esempio su HDD da 1–2 GB:
+
+Partizione	Tipo	Dimensione	Note
+1	Boot Manager	1–2 MB	primaria
+2	DOS	100–500 MB	primaria, FAT
+3	OS/2	300–1000 MB	primaria o logica, HPFS
+4	Dati (opz.)	resto	FAT o HPFS
+PROCEDURA PASSO-PASSO
+1️⃣ Preparazione disco con OS/2 FDISK
+Avvia il PC con i disk di installazione di OS/2
+
+Quando richiesto, entra in FDISK
+
+Cancella tutte le partizioni esistenti
+
+Crea una partizione:
+
+Tipo: Boot Manager
+
+Dimensione: 1–2 MB
+
+Marca come Installable
+
+Salva ma NON riavviare ancora
+
+2️⃣ Creazione partizione DOS
+Sempre da FDISK OS/2
+
+Crea una partizione primaria FAT
+
+Dimensione: a scelta (es. 200 MB)
+
+Marca la partizione come:
+
+Startable
+
+Aggiunta al Boot Manager
+
+Esci da FDISK
+
+Riavvia con disk MS-DOS 5.22
+
+3️⃣ Installazione MS-DOS 5.22
+Avvia con floppy DOS
+
+Format:
+
+FORMAT C: /S
+Installa DOS:
+
+SETUP
+oppure copia manualmente i file di sistema
+
+Verifica che DOS si avvii correttamente
+
+Spegni il PC
+
+4️⃣ Creazione partizione OS/2
+Avvia di nuovo con disk OS/2
+
+Entra in FDISK
+
+Crea una partizione per OS/2:
+
+Tipo: primaria o logica
+
+File system: HPFS (consigliato) o FAT
+
+Marca la partizione:
+
+Installable
+
+Aggiunta al Boot Manager
+
+Salva ed esci
+
+5️⃣ Installazione di OS/2
+Continua l’installazione OS/2
+
+Seleziona la partizione creata
+
+Completa installazione normalmente
+
+Al termine, il sistema riavvia
+
+6️⃣ Configurazione Boot Manager OS/2
+Al riavvio vedrai il menu Boot Manager:
+
+MS-DOS 5.22
+
+OS/2
+
+Puoi:
+
+Cambiare nomi
+
+Impostare OS di default
+
+Impostare timeout
+
+Da OS/2:
+
+FDISK
+→ Boot Manager menu
+
+Problemi comuni & soluzioni
+❌ DOS non parte
+Assicurati che la partizione DOS sia primaria FAT
+
+DOS non può stare in partizione logica
+
+❌ Boot Manager non appare
+Partizione Boot Manager non marcata Installable
+
+MBR sovrascritto → reinstallare Boot Manager da FDISK OS/2
+
+❌ Disco > 2GB
+Usa OS/2 Warp 4 + HPFS
+
+Evita DOS su dischi grandi senza overlay
+
+Consigli extra (da nostalgico 😄)
+OS/2 + HPFS = molto più stabile di FAT
+
+Non installare DOS dopo OS/2 (rompe l’MBR)
+
+Tieni sempre i floppy di OS/2 a portata di mano
+
+Se vuoi, posso:
+
+adattare la procedura a OS/2 Warp 3 o 4
+
+creare uno schema partizioni preciso in base al tuo HDD
+
+spiegare come aggiungere Windows 3.1 / 95 al Boot Manager
+
+Dimmi che macchina stai usando 😉
+
+
+
+
+Allega
+
+Cerca
+
+Studia
+
+Crea immagine
+
+Vocale
+Nessun file selezionatoNessun file selezionato
+ChatGPT può commettere errori. Assicurati di verificare le informazioni importanti. Vedi Preferenze sui cookie.
